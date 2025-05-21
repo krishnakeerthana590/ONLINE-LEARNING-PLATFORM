@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Learning Platform - CodTech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <style>
+    :root {
+      --primary-color: #1e90ff;
+      --bg-color: #f2f2f2;
+      --text-color: #333;
+      --card-bg: white;
+      --gradient-header: linear-gradient(90deg, #1e90ff, #6f42c1);
+    }
+
+    body.dark-mode {
+      --bg-color: #121212;
+      --text-color: #f2f2f2;
+      --card-bg: #1e1e1e;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+    header,
+    footer {
+      background: var(--gradient-header);
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    section {
+      margin-bottom: 30px;
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: var(--primary-color);
+    }
+    h3 {
+      color: var(--primary-color);
+    }
+    p {
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .certificate {
+      text-align: center;
+      padding: 20px;
+      border: 2px dashed #ccc;
+    }
+    .features-list li::before {
+      content: '✔';
+      margin-right: 10px;
+      color: green;
+    }
+    .toggle-mode {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      color: black;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .language-buttons {
+      margin-bottom: 20px;
+    }
+    .language-buttons button {
+      margin: 5px 8px 5px 0;
+      padding: 10px 16px;
+      border: none;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .language-buttons button:hover {
+      background-color: #005ecb;
+    }
+    .quiz-question label {
+      cursor: pointer;
+    }
+    .progress-container {
+      background-color: #ddd;
+      border-radius: 5px;
+      height: 20px;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .progress-bar {
+      background-color: var(--primary-color);
+      height: 100%;
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.5s ease-in-out;
+    }
+    #submit-btn {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      display: none;
+      transition: background-color 0.3s ease;
+    }
+    #submit-btn:hover {
+      background-color: #005ecb;
+    }
+    #quiz-result {
+      margin-top: 15px;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+    /* Progress bars for the course progress section */
+    .course-progress-item {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-mode" onclick="document.body.classList.toggle('dark-mode')">
+    <i class="fas fa-moon"></i> Toggle Dark Mode
+  </button>
+
+  <header>
+    <h1>Krishna Online Learning Platform</h1>
+    <p>Empowering Interns & Developers with Quality, Hands-on Knowledge</p>
+  </header>
+
+  <main>
+    <section>
+      <h2><i class="fas fa-info-circle"></i> About CodTech</h2>
+      <p>CodTech is an innovative online learning platform designed to equip interns and aspiring developers with the essential skills and knowledge needed to excel in today's technology landscape. Our platform offers high-quality content, including video tutorials, quizzes, certificates, and progress tracking to ensure a rich and interactive learning experience.</p>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-star"></i> Key Features</h2>
+      <ul class="features-list">
+        <li>Interactive Video Lessons</li>
+        <li>Language-Specific Quizzes</li>
+        <li>Progress Tracking and Analytics</li>
+        <li>Downloadable Certificate of Completion</li>
+        <li>Dark Mode Toggle for Comfort</li>
+        <li>Mobile-Responsive Design</li>
+        <li>Access to Mentor Support and Discussion Forums</li>
+        <li>Real-World Projects and Assignments</li>
+        <li>Gamified Learning with Badges and Levels</li>
+        <li>Multi-language and Framework Coverage (HTML, CSS, JS, Python, C++, React, etc.)</li>
+        <li>Course Completion Percentage Display</li>
+        <li>Personalized Learning Paths</li>
+      </ul>
+    </section>
+
+<section>
+  <h2><i class="fab fa-youtube"></i> Featured YouTube Tutorials</h2>
+  <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+    <iframe width="100%" height="180" src="https://www.youtube.com/embed/UB1O30fR-EE" title="HTML Tutorial" frameborder="0" allowfullscreen></iframe>
+    <iframe width="100%" height="180" src="https://www.youtube.com/embed/yfoY53QXEnI" title="CSS Tutorial" frameborder="0" allowfullscreen></iframe>
+    <iframe width="100%" height="180" src="https://www.youtube.com/embed/PKwu15ldZ7k" title="JavaScript Tutorial" frameborder="0" allowfullscreen></iframe>
+    <iframe width="100%" height="180" src="https://www.youtube.com/embed/_uQrJ0TkZlc" title="Python Tutorial" frameborder="0" allowfullscreen></iframe>
+    <iframe width="100%" height="180" src="https://www.youtube.com/embed/vLnPwxZdW4Y" title="C++ Tutorial" frameborder="0" allowfullscreen></iframe>
+    <iframe width="100%" height="180" src="https://www.youtube.com/embed/Ke90Tje7VS0" title="React Tutorial" frameborder="0" allowfullscreen></iframe>
+    <iframe width="100%" height="180" src="https://www.youtube.com/embed/k5E2AVpwsko" title="Angular Tutorial" frameborder="0" allowfullscreen></iframe>
+    <iframe width="100%" height="180" src="https://www.youtube.com/embed/grEKMHGYyns" title="Java Tutorial" frameborder="0" allowfullscreen></iframe>
+  </div>
+</section>
+
+    <section class="certificate">
+      <h2><i class="fas fa-award"></i> Certificate of Completion</h2>
+      <p>Complete any course and earn a downloadable certificate to showcase your skills and achievement.</p>
+      <button onclick="generateCertificate()">Download Certificate</button>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-question-circle"></i> Quiz</h2>
+      <div class="language-buttons">
+        <button onclick="showQuiz('html')">HTML</button>
+        <button onclick="showQuiz('css')">CSS</button>
+        <button onclick="showQuiz('javascript')">JavaScript</button>
+        <button onclick="showQuiz('python')">Python</button>
+        <button onclick="showQuiz('c')">C</button>
+        <button onclick="showQuiz('cpp')">C++</button>
+        <button onclick="showQuiz('react')">React</button>
+        <button onclick="showQuiz('angular')">Angular</button>
+        <button onclick="showQuiz('java')">Java</button>
+      </div>
+      <form id="quiz-form" onsubmit="event.preventDefault(); checkQuiz();">
+        <div id="quiz-questions"></div>
+        <button id="submit-btn" type="submit">Submit Quiz</button>
+      </form>
+      <p id="quiz-result"></p>
+    </section>
+
+    <!-- New Course Progress Section -->
+    <section>
+      <h2><i class="fas fa-tasks"></i> Course Progress</h2>
+      <div id="course-progress-container">
+        <!-- Progress bars inserted dynamically here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Krishna. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Escape HTML special chars so options like <a> show correctly
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+
+    const quizzes = {
+      html: [
+        {
+          q: "What does HTML stand for?",
+          options: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyperlinking Text Marking Language"],
+          answer: 0,
+        },
+        {
+          q: "Which tag is used to create a hyperlink in HTML?",
+          options: ["<a>", "<img>", "<link>", "<href>"],
+          answer: 0,
+        },
+        {
+          q: "What is the correct HTML element for inserting a line break?",
+          options: ["<break>", "<lb>", "<br>", "<bl>"],
+          answer: 2,
+        },
+        {
+          q: "Which attribute specifies an alternate text for an image?",
+          options: ["alt", "src", "title", "href"],
+          answer: 0,
+        },
+        {
+          q: "Which doctype is correct for HTML5?",
+          options: ["<!DOCTYPE html>", "<!DOCTYPE HTML5>", "<!DOCTYPE html5>", "<!DOCTYPE>"],
+          answer: 0,
+        },
+      ],
+      css: [
+        {
+          q: "Which property is used to change the text color in CSS?",
+          options: ["font-color", "color", "text-color", "fgcolor"],
+          answer: 1,
+        },
+        {
+          q: "Which CSS property controls the layout of elements?",
+          options: ["position", "layout", "display", "flow"],
+          answer: 2,
+        },
+        {
+          q: "How do you select an element with id 'header'?",
+          options: ["#header", ".header", "*header", "header"],
+          answer: 0,
+        },
+        {
+          q: "What does CSS stand for?",
+          options: ["Computer Style Sheets", "Creative Style Sheets", "Cascading Style Sheets", "Colorful Style Sheets"],
+          answer: 2,
+        },
+        {
+          q: "Which property is used to make text bold?",
+          options: ["font-weight: bold;", "text-style: bold;", "font-style: bold;", "font-weight: normal;"],
+          answer: 0,
+        },
+      ],
+      javascript: [
+        {
+          q: "Which symbol is used for comments in JavaScript?",
+          options: ["//", "/* */", "#", "<!-- -->"],
+          answer: 0,
+        },
+        {
+          q: "How do you declare a variable in JavaScript?",
+          options: ["var", "let", "const", "All of the above"],
+          answer: 3,
+        },
+        {
+          q: "What is the output of 'typeof NaN'?",
+          options: ["number", "NaN", "undefined", "object"],
+          answer: 0,
+        },
+        {
+          q: "Which method converts JSON to a JavaScript object?",
+          options: ["JSON.stringify()", "JSON.parse()", "JSON.object()", "JSON.convert()"],
+          answer: 1,
+        },
+        {
+          q: "Which of the following is a JavaScript framework?",
+          options: ["React", "Laravel", "Django", "Flask"],
+          answer: 0,
+        },
+      ],
+      python: [
+        {
+          q: "What symbol is used to start a comment in Python?",
+          options: ["//", "#", "/* */", "<!-- -->"],
+          answer: 1,
+        },
+        {
+          q: "Which of the following is a Python data type?",
+          options: ["int", "str", "list", "All of the above"],
+          answer: 3,
+        },
+        {
+          q: "How do you create a function in Python?",
+          options: ["function myFunc():", "def myFunc():", "create myFunc():", "func myFunc():"],
+          answer: 1,
+        },
+        {
+          q: "Which keyword is used to handle exceptions in Python?",
+          options: ["try", "catch", "except", "final"],
+          answer: 2,
+        },
+        {
+          q: "What is the correct file extension for Python files?",
+          options: [".py", ".pt", ".pyt", ".python"],
+          answer: 0,
+        },
+      ],
+      c: [
+        {
+          q: "Which header file is needed for printf function?",
+          options: ["stdio.h", "stdlib.h", "string.h", "conio.h"],
+          answer: 0,
+        },
+        {
+          q: "What is the correct syntax to declare a pointer in C?",
+          options: ["int *ptr;", "int ptr;", "pointer ptr;", "ptr int;"],
+          answer: 0,
+        },
+        {
+          q: "How do you start the main function in C?",
+          options: ["void main()", "int main()", "main()", "function main()"],
+          answer: 1,
+        },
+        {
+          q: "Which operator is used to access a value pointed by pointer?",
+          options: ["*", "&", "%", "#"],
+          answer: 0,
+        },
+        {
+          q: "Which keyword is used to define a constant in C?",
+          options: ["constant", "const", "final", "immutable"],
+          answer: 1,
+        },
+      ],
+      cpp: [
+        {
+          q: "Which feature is not part of C++?",
+          options: ["Classes", "Inheritance", "Pointers", "Garbage Collection"],
+          answer: 3,
+        },
+        {
+          q: "Which keyword is used to define a namespace?",
+          options: ["namespace", "using", "include", "package"],
+          answer: 0,
+        },
+        {
+          q: "How do you declare a class in C++?",
+          options: ["class MyClass {}", "class MyClass;", "class MyClass()", "class:MyClass {}"],
+          answer: 0,
+        },
+        {
+          q: "Which operator is used to access members of a class through pointer?",
+          options: ["->", ".", "*", "&"],
+          answer: 0,
+        },
+        {
+          q: "Which STL container is used for dynamic arrays?",
+          options: ["vector", "list", "map", "array"],
+          answer: 0,
+        },
+      ],
+      react: [
+        {
+          q: "React is a ___ library.",
+          options: ["JavaScript UI", "CSS Framework", "Backend Framework", "Database"],
+          answer: 0,
+        },
+        {
+          q: "Which method is used to create a React component?",
+          options: ["React.createComponent()", "React.Component()", "function or class", "new React()"],
+          answer: 2,
+        },
+        {
+          q: "What is JSX?",
+          options: ["JavaScript XML", "Java Syntax", "Java Style eXtension", "JSON Extended"],
+          answer: 0,
+        },
+        {
+          q: "How do you pass data between React components?",
+          options: ["props", "state", "events", "attributes"],
+          answer: 0,
+        },
+        {
+          q: "Which hook is used to manage state in functional components?",
+          options: ["useState()", "useEffect()", "useContext()", "useReducer()"],
+          answer: 0,
+        },
+      ],
+      angular: [
+        {
+          q: "Angular is developed by?",
+          options: ["Google", "Facebook", "Microsoft", "Apple"],
+          answer: 0,
+        },
+        {
+          q: "Which language is primarily used in Angular?",
+          options: ["TypeScript", "JavaScript", "Dart", "Java"],
+          answer: 0,
+        },
+        {
+          q: "Which directive is used for two-way data binding?",
+          options: ["ngModel", "ngBind", "ngClass", "ngIf"],
+          answer: 0,
+        },
+        {
+          q: "Which file contains the main module of Angular app?",
+          options: ["app.module.ts", "main.ts", "index.html", "styles.css"],
+          answer: 0,
+        },
+        {
+          q: "Which command is used to create a new Angular project?",
+          options: ["ng new", "npm init", "ng create", "npm start"],
+          answer: 0,
+        },
+      ],
+      java: [
+        {
+          q: "Which of these is not a Java feature?",
+          options: ["Object-oriented", "Platform Independent", "Use of pointers", "Multithreaded"],
+          answer: 2,
+        },
+        {
+          q: "Which method is the entry point of a Java program?",
+          options: ["start()", "main()", "run()", "init()"],
+          answer: 1,
+        },
+        {
+          q: "Which keyword is used to inherit a class in Java?",
+          options: ["extends", "implements", "inherits", "super"],
+          answer: 0,
+        },
+        {
+          q: "What does JVM stand for?",
+          options: ["Java Variable Machine", "Java Virtual Machine", "Java Verified Machine", "Java Visual Machine"],
+          answer: 1,
+        },
+        {
+          q: "Which exception must be handled or declared?",
+          options: ["RuntimeException", "IOException", "Error", "NullPointerException"],
+          answer: 1,
+        },
+      ],
+    };
+
+    // Show quiz questions for selected language
+    function showQuiz(language) {
+  const quizContainer = document.getElementById("quiz-questions");
+  const submitBtn = document.getElementById("submit-btn");
+  const quizResult = document.getElementById("quiz-result");
+  quizResult.textContent = '';
+  submitBtn.style.display = "inline-block";
+
+  const quiz = quizzes[language];
+  if (!quiz) {
+    quizContainer.innerHTML = "<p>No quiz available for this language.</p>";
+    submitBtn.style.display = "none";
+    return;
+  }
+
+  let html = '';
+  quiz.forEach((q, index) => {
+    html += `<div class="quiz-question">
+      <p><strong>Q${index + 1}:</strong> ${escapeHtml(q.q)}</p>`;
+    q.options.forEach((opt, i) => {
+      html += `
+        <label>
+          <input type="radio" name="q${index}" value="${i}" required />
+          ${escapeHtml(opt)}
+        </label><br/>`;
+    });
+    html += '</div><hr>';
+  });
+  quizContainer.innerHTML = html;
+}
+
+    // Check quiz answers and save progress
+    function checkQuiz() {
+      const quizContainer = document.getElementById("quiz-questions");
+      const quizResult = document.getElementById("quiz-result");
+      const submitBtn = document.getElementById("submit-btn");
+
+      const language = quizContainer.dataset.currentLanguage;
+      if (!language) return;
+
+      const questions = quizzes[language];
+      let score = 0;
+      let total = questions.length;
+
+      for (let i = 0; i < total; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!selected) {
+          alert("Please answer all questions.");
+          return;
+        }
+        if (parseInt(selected.value) === questions[i].answer) score++;
+      }
+
+      quizResult.textContent = `You scored ${score} out of ${total}. (${((score / total) * 100).toFixed(1)}%)`;
+
+      // Save progress as percentage (assuming each quiz counts equally)
+      localStorage.setItem('progress_' + language, Math.round((score / total) * 100));
+
+      submitBtn.style.display = "none";
+
+      // Update progress section after quiz submission
+      updateCourseProgress();
+    }
+
+    // Generate certificate as a simple text file
+    function generateCertificate() {
+      const certificateText = "Congratulations! You've successfully completed the course on CodTech.";
+      const blob = new Blob([certificateText], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'CodTech_Certificate.txt';
+      link.click();
+    }
+
+    // Update Course Progress Section
+    function updateCourseProgress() {
+      const container = document.getElementById('course-progress-container');
+      container.innerHTML = '';
+
+      // For each course, get progress from localStorage, default to 0
+      for (const language in quizzes) {
+        let progress = parseInt(localStorage.getItem('progress_' + language)) || 0;
+
+        const progressItem = document.createElement('div');
+        progressItem.className = 'course-progress-item';
+
+        progressItem.innerHTML = `
+          <h4>${language.toUpperCase()}</h4>
+          <div class="progress-container">
+            <div class="progress-bar" style="width: ${progress}%;"></div>
+          </div>
+          <p>${progress}% completed</p>
+        `;
+        container.appendChild(progressItem);
+      }
+    }
+
+    // Initialize progress bars on page load
+    window.onload = () => {
+      updateCourseProgress();
+    };
+  </script>
+</body>
+</html>
